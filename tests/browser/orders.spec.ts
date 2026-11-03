@@ -10,6 +10,8 @@ for (const round of ['morning', 'afternoon']) {
     const name = `Test ${round} ${Date.now()}`
     await page.goto(`/?round=${round}`)
     await expect(page.getByText('Live board', { exact: true })).toBeVisible()
+    await expect(page.getByRole('radio', { name: 'Milk tea' })).toBeVisible()
+    await expect(page.getByRole('radio', { name: 'Green tea' })).toHaveCount(0)
     await page.getByLabel('Your name').fill(name)
     await page.getByRole('radio', { name: 'Plain tea' }).check()
     await page.getByRole('radio', { name: 'No sugar' }).check()
@@ -32,15 +34,15 @@ for (const round of ['morning', 'afternoon']) {
       second.getByRole('button', { name: 'Edit your order' }),
     ).toHaveCount(0)
     await page.getByRole('button', { name: 'Edit my order' }).click()
-    await page.getByRole('radio', { name: 'Green tea' }).check()
+    await page.getByRole('radio', { name: 'Milk coffee' }).check()
     await page.getByRole('radio', { name: 'Less sugar' }).check()
     await page.getByRole('button', { name: 'Save my changes' }).click()
     await expect(page.getByRole('row').filter({ hasText: name })).toContainText(
-      'Green tea',
+      'Milk coffee',
     )
     await expect(
       second.getByRole('row').filter({ hasText: name }),
-    ).toContainText('Green tea', { timeout: 15000 })
+    ).toContainText('Milk coffee', { timeout: 15000 })
     await page.reload()
     await expect(
       page.getByRole('heading', { name: 'You’re on the list!' }),

@@ -8,7 +8,7 @@ UI previews: [Desktop](docs/desktop-preview.png) · [Mobile](docs/mobile-preview
 
 - Responsive cream, coral, mint and lavender interface, with locally hosted fonts and an original tea illustration.
 - Separate morning and afternoon rounds. A fresh board each day at midnight in **Asia/Colombo**.
-- Milk tea, plain tea, green tea and coffee; no sugar (0 tsp), less sugar (1 tsp), or regular (2 tsp); optional preparation notes.
+- Milk tea, plain tea, milk coffee and coffee; no sugar (0 tsp), less sugar (1 tsp), or regular (2 tsp); optional preparation notes.
 - Shared orders across phones and computers, refreshed every 10 seconds and when you return to the page.
 - Name search, alphabetical sorting, cup totals, browser-owned order editing and cancellation.
 - Large tea-aunty view grouped by drink and sugar preference, including names and notes. Print to paper or PDF from the browser.

@@ -57,7 +57,8 @@ test('shared storage persists orders and only the creator can edit or cancel', a
     true,
   )
   assert.equal(
-    (await request('PUT', { ...order, tea: 'green' }, other, `/${id}`)).status,
+    (await request('PUT', { ...order, tea: 'milk-coffee' }, other, `/${id}`))
+      .status,
     403,
   )
   assert.equal(
@@ -67,18 +68,18 @@ test('shared storage persists orders and only the creator can edit or cancel', a
   assert.equal((await request('POST', order, owner)).status, 409)
   const edited = await request(
     'PUT',
-    { ...order, tea: 'green', sugar: 'none' },
+    { ...order, tea: 'milk-coffee', sugar: 'none' },
     owner,
     `/${id}`,
   )
-  assert.equal(edited.body.order.tea, 'green')
+  assert.equal(edited.body.order.tea, 'milk-coffee')
   const restoredHandler = createHandler(localStore(root), {
     now: () => fixedNow,
   })
   const restored = await restoredHandler(
     new Request(`https://tea.example/api/orders?day=${day}`),
   )
-  assert.equal((await restored.json()).orders[0].tea, 'green')
+  assert.equal((await restored.json()).orders[0].tea, 'milk-coffee')
   assert.equal(
     (await request('DELETE', undefined, owner, `/${id}`)).status,
     200,

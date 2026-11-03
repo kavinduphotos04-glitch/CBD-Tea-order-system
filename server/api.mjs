@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 
-export const TEAS = ['milk', 'plain', 'green', 'coffee']
+export const TEAS = ['milk', 'plain', 'milk-coffee', 'coffee']
 export const SUGARS = ['none', 'less', 'regular']
 export const ROUNDS = ['morning', 'afternoon']
 export function teaDay(now = new Date()) {

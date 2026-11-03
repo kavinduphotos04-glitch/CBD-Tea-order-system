@@ -34,7 +34,7 @@ import {
   X,
 } from 'lucide-react'
 
-type Tea = 'milk' | 'plain' | 'green' | 'coffee'
+type Tea = 'milk' | 'plain' | 'milk-coffee' | 'coffee' | 'green'
 type Sugar = 'none' | 'less' | 'regular'
 type Round = 'morning' | 'afternoon'
 type Order = {
@@ -69,11 +69,11 @@ const drinks: {
     icon: Coffee,
   },
   {
-    id: 'green',
-    name: 'Green tea',
-    description: 'A lighter little sip',
+    id: 'milk-coffee',
+    name: 'Milk coffee',
+    description: 'Smooth & milky',
     color: 'mint',
-    icon: Leaf,
+    icon: Coffee,
   },
   {
     id: 'coffee',
@@ -83,6 +83,19 @@ const drinks: {
     icon: Coffee,
   },
 ]
+// Keep previously saved green-tea orders readable without offering new ones.
+const legacyDrinks: typeof drinks = [
+  {
+    id: 'green',
+    name: 'Green tea',
+    description: 'Previous menu',
+    color: 'mint',
+    icon: Leaf,
+  },
+]
+const drinkFor = (tea: Tea) =>
+  [...drinks, ...legacyDrinks].find((drink) => drink.id === tea)!
+
 const sugars: { id: Sugar; label: string; description: string }[] = [
   { id: 'none', label: 'No sugar', description: '0 tsp' },
   { id: 'less', label: 'Less sugar', description: '1 tsp' },
@@ -377,7 +390,12 @@ export default function App() {
         ),
     [orders, search, sort],
   )
-  const groups = drinks.map((drink) => ({
+  const groups = [
+    ...drinks,
+    ...legacyDrinks.filter((drink) =>
+      orders.some((order) => order.tea === drink.id),
+    ),
+  ].map((drink) => ({
     ...drink,
     orders: orders.filter((order) => order.tea === drink.id),
   }))
@@ -391,7 +409,7 @@ export default function App() {
   const beginEdit = () => {
     if (!myOrder) return
     setName(myOrder.name)
-    setTea(myOrder.tea)
+    setTea(myOrder.tea === 'green' ? 'milk-coffee' : myOrder.tea)
     setSugar(myOrder.sugar)
     setNote(myOrder.note)
     setEditing(true)
@@ -646,9 +664,7 @@ export default function App() {
             </div>
             {myOrder && !editing ? (
               <div className="my-order">
-                <div
-                  className={`my-cup ${drinks.find((d) => d.id === myOrder.tea)?.color}`}
-                >
+                <div className={`my-cup ${drinkFor(myOrder.tea).color}`}>
                   <Coffee size={43} strokeWidth={1.4} />
                   <span className="my-check">
                     <Check size={15} />
@@ -659,8 +675,7 @@ export default function App() {
                 </span>
                 <h3>{myOrder.name}</h3>
                 <p>
-                  {drinks.find((d) => d.id === myOrder.tea)?.name}{' '}
-                  <span>·</span>{' '}
+                  {drinkFor(myOrder.tea).name} <span>·</span>{' '}
                   {sugars.find((s) => s.id === myOrder.sugar)?.label}
                 </p>
                 {myOrder.note && (
@@ -886,7 +901,7 @@ export default function App() {
                 </thead>
                 <tbody>
                   {filtered.map((order, index) => {
-                    const drink = drinks.find((d) => d.id === order.tea)!
+                    const drink = drinkFor(order.tea)
                     return (
                       <tr key={order.id}>
                         <td>
