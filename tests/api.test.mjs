@@ -16,7 +16,7 @@ const order = {
   note: 'Extra strong',
 }
 async function fixture(t) {
-  const root = await mkdtemp(join(tmpdir(), 'cbd-tea-test-'))
+  const root = await mkdtemp(join(tmpdir(), 'gsm-tea-test-'))
   t.after(() => rm(root, { recursive: true, force: true }))
   const handler = createHandler(localStore(root), { now: () => fixedNow })
   const request = async (

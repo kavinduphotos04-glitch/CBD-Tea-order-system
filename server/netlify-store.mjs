@@ -1,6 +1,7 @@
 import { getStore } from '@netlify/blobs'
 
 export function netlifyStore() {
+  // Keep the existing internal namespace so a branding update preserves live orders.
   const store = getStore({ name: 'cbd-tea-orders', consistency: 'strong' })
   return {
     get: (key) => store.getWithMetadata(key, { type: 'json' }),

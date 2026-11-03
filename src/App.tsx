@@ -128,6 +128,7 @@ const defaultRound = (): Round => {
     ? 'morning'
     : 'afternoon'
 }
+// Persistent keys stay stable so existing users keep their order-editing access.
 function identity() {
   try {
     const existing = localStorage.getItem('cbd-tea-identity')
@@ -508,12 +509,12 @@ export default function App() {
     <>
       <header className="site-header">
         <div className="header-inner">
-          <a className="brand" href="/" aria-label="CBD Tea Club home">
+          <a className="brand" href="/" aria-label="GSM Tea Club home">
             <span className="brand-icon">
               <Coffee size={25} strokeWidth={1.8} />
             </span>
             <span>
-              CBD<span className="brand-light"> tea club</span>
+              GSM<span className="brand-light"> tea club</span>
               <span className="brand-dot">.</span>
             </span>
           </a>
@@ -575,7 +576,7 @@ export default function App() {
             </span>
             <TeaIllustration />
             <span className="hero-caption">
-              <span /> BREWING GOOD VIBES AT CBD
+              <span /> BREWING GOOD VIBES AT GSM
             </span>
           </div>
           <div className="hero-side-note">
@@ -1059,11 +1060,11 @@ export default function App() {
       </main>
       <footer className="site-footer">
         <a className="footer-brand" href="/">
-          CBD tea club<span>.</span>
+          GSM tea club<span>.</span>
         </a>
         <span>Small breaks. Better days.</span>
         <span>
-          Made for the CBD crew <Heart size={13} />
+          Made for the GSM crew <Heart size={13} />
         </span>
       </footer>
 
@@ -1128,7 +1129,7 @@ export default function App() {
             <Heart size={19} />
           </div>
           <p className="modal-intro">
-            Send the {round} tea link to the CBD crew.
+            Send the {round} tea link to the GSM crew.
             <br />
             Everyone’s order lands on the same board.
           </p>
@@ -1197,7 +1198,7 @@ export default function App() {
       )}
       {modal === 'aunty' && (
         <Modal
-          title="It’s tea time, CBD."
+          title="It’s tea time, GSM."
           className="aunty-dialog"
           close={() => setModal(null)}
         >

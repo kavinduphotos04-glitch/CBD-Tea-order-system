@@ -53,7 +53,7 @@ for (const round of ['morning', 'afternoon']) {
     await page.getByRole('button', { name: 'Tea aunty view' }).click()
     const dialog = page.getByRole('dialog')
     await expect(
-      dialog.getByRole('heading', { name: 'It’s tea time, CBD.' }),
+      dialog.getByRole('heading', { name: 'It’s tea time, GSM.' }),
     ).toBeVisible()
     await expect(
       dialog.getByRole('listitem').filter({ hasText: name }),

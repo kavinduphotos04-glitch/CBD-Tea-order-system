@@ -1,6 +1,6 @@
-# CBD Tea Club
+# GSM Tea Club
 
-A friendly shared tea board for the CBD team. Open one link, choose a tea round, add your name and drink preference, and show the grouped list to tea aunty.
+A friendly shared tea board for the GSM team. Open one link, choose a tea round, add your name and drink preference, and show the grouped list to tea aunty.
 
 UI previews: [Desktop](docs/desktop-preview.png) · [Mobile](docs/mobile-preview.png). These are local screenshots, not live deployment links.
 
@@ -46,7 +46,7 @@ The browser stores a random order identity and optionally remembers the name. Th
 
 ## Deploy to Netlify
 
-The project is configured for Netlify, but publication requires access to your Netlify account. No live URL has been created yet.
+The project is configured for Netlify. Use your existing site for updates, or follow the steps below to create a new one. Deployment requires access to your Netlify account.
 
 ### From your computer
 
@@ -56,7 +56,7 @@ npx netlify-cli login
 npx netlify-cli deploy --prod --build
 ```
 
-On the first deploy, choose **Create & configure a new site**, select your team and a site name, then use the returned production URL for the CBD crew. Netlify will bundle the function and provision Blobs storage automatically. To redeploy, run the same deploy command in this checkout.
+On the first deploy, choose **Create & configure a new site**, select your team and a site name, then use the returned production URL for the GSM crew. Netlify will bundle the function and provision Blobs storage automatically. To redeploy, run the same deploy command in this checkout.
 
 Alternatively, push the source to your GitHub repository, import that repository in Netlify, and let Netlify use the settings in `netlify.toml` (build: `npm run build`, publish: `dist`, functions: `netlify/functions`).
 
@@ -64,7 +64,7 @@ Alternatively, push the source to your GitHub repository, import that repository
 
 A requirement named `NETLIFY_AUTH_TOKEN` has been saved in environment settings, scoped to `api.netlify.com`, along with access to Netlify deployment URLs. Enter a Netlify personal access token there securely, save and publish the environment configuration, then continue this task. Do not paste credentials into chat or commit them. A configured requirement is not a supplied credential, and saving settings is separate from deploying the application.
 
-After the token is available, use the installed CLI at `/workspace/.cbd-tools/node_modules/.bin/netlify`, create or select the intended Netlify site, and deploy with `--prod --build`. If using Node’s built-in proxy support, `NODE_USE_ENV_PROXY=1` makes API requests respect the environment’s existing HTTPS proxy. Keep TLS verification and inherited proxy settings enabled.
+After the token is available, use `npx netlify-cli`, create or select the intended Netlify site, and deploy with `--prod --build`. If using Node’s built-in proxy support, `NODE_USE_ENV_PROXY=1` makes API requests respect the environment’s existing HTTPS proxy. Keep TLS verification and inherited proxy settings enabled.
 
 After publication, verify the public `/api/orders` endpoint and repeat a create → second-browser read → edit → cancel check on the actual site. Local tests alone do not establish a live deployment.
 
@@ -74,4 +74,4 @@ After publication, verify the public `/api/orders` endpoint and repeat a create 
 - Browser: morning and afternoon order flows, cross-browser refresh, edits, reload persistence, search, tea-aunty display, print layout, sharing, cancellation and connection recovery passed on desktop and mobile.
 - Automated accessibility: WCAG A/AA checks passed for the empty order board and share dialog on desktop and mobile. These checks supplement, rather than replace, manual accessibility review.
 - Netlify local runtime: the actual Node function and Netlify Blobs adapter passed GET, POST, PUT and DELETE checks. The unused Edge Functions emulator was disabled for this check because its additional runtime download was unavailable.
-- Live Netlify deployment: **pending account authentication**.
+- Live-site verification is separate from these local checks; verify the production order flow after deploying updates.
